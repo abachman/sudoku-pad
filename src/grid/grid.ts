@@ -17,9 +17,20 @@ class Grid {
       cell.target.dispatchEvent(event);
     }
 
+    this.refresh();
+  }
+
+  refresh() {
     for (const cell of Object.values(this.cells)) {
       cell.refresh()
     }
+  }
+
+  clear() {
+    for (const cell of Object.values(this.cells)) {
+      cell.state.selected = false;
+    }
+    this.refresh();
   }
 }
 

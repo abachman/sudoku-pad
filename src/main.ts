@@ -2,9 +2,9 @@ import { SVG } from "@svgdotjs/svg.js";
 import { Cell } from "./grid/cell.js";
 import { Block } from "./grid/block.js";
 import { Grid } from "./grid/grid.js";
+import mousetrap from "mousetrap";
 
 import "./style.css";
-
 // calculate geometry
 const width = 680;
 const height = 500;
@@ -67,3 +67,9 @@ for (const cell of cells) {
 for (const block of blocks) {
   block.draw(canvas);
 }
+
+// global keyboard event handlers
+mousetrap.bind("esc", () => {
+  grid.clear();
+});
+
