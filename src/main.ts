@@ -2,6 +2,8 @@ import { SVG } from "@svgdotjs/svg.js";
 import { Cell } from "./grid/cell.js";
 import { Block } from "./grid/block.js";
 import { Grid } from "./grid/grid.js";
+import { Button } from "./grid/button";
+import { DIRS } from "./util/direction.js";
 import mousetrap from "mousetrap";
 
 import "./style.css";
@@ -47,7 +49,7 @@ for (let band = 0; band < 3; band++) {
           block,
           grid,
         });
-        cells.push(cell)
+        cells.push(cell);
       }
     }
   }
@@ -55,7 +57,7 @@ for (let band = 0; band < 3; band++) {
 
 // Create SVG and set viewbox
 // so that we zoom into the center
-const canvas = SVG()
+const canvas = SVG();
 canvas.addTo("#app").size(width, height);
 
 // grid
@@ -68,8 +70,51 @@ for (const block of blocks) {
   block.draw(canvas);
 }
 
-// global keyboard event handlers
-mousetrap.bind("esc", () => {
-  grid.clear();
+// indicators
+const pencil = new Button({
+  svg: canvas,
+  symbol: Button.PENCIL,
+  coords: [ox, oy + side * 9 + 8, 32],
 });
 
+// global keyboard event handlers
+mousetrap.bind("esc", () => {
+  grid.clearSelection();
+});
+
+for (const [dir, code] of Object.entries(DIRS)) {
+  mousetrap.bind(dir, () => {
+    grid.moveFocus(code as DIR);
+  });
+
+  mousetrap.bind(`shift+${dir}`, () => {
+    grid.moveFocus(code as DIR, { shift: true });
+  });
+}
+
+const nums = Array.from({ length: 10 }, (_, i) => i.toString());
+for (const num of nums) {
+  mousetrap.bind(num, () => {
+    const focused = grid.state.focused;
+    if (focused) {
+      focused.set(parseInt(num));
+    }
+  });
+}
+
+// d for delete
+mousetrap.bind("d", () => {
+  const focused = grid.state.focused;
+  if (focused) {
+    focused.clear();
+  }
+});
+
+// p for pencil mode
+const togglePencil = () => {
+  grid.state.pencil = !grid.state.pencil;
+  pencil.toggle(grid.state.pencil);
+}
+
+mousetrap.bind("p", togglePencil) 
+pencil.click(togglePencil) 

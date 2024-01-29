@@ -11,8 +11,10 @@ class Block extends Square {
   }
 
   draw(canvas: SVG.Svg) {
-    this.element = this.trace(canvas);
-    this.element.attr({ strokeWidth: 3, fill: "transparent" }).css(pnone);
+    this.group = this.border(canvas, (el) => {
+      el.stroke({ color: "#000", width: 3 })
+        .css(pnone);
+    });
   }
 }
 

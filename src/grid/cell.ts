@@ -115,6 +115,16 @@ class Cell extends Square {
     this.element.on("mouseout", this.onMouseout.bind(this));
     this.element.on("click", this.onClick.bind(this));
   }
+
+  set(value: number) {
+    this.state.value = value;
+    this.label(value.toString());
+  }
+
+  clear() {
+    this.state.value = null;
+    this.label("");
+  }
 }
 
 export { Cell };
