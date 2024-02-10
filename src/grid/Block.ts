@@ -1,17 +1,17 @@
 import SVG from "@svgdotjs/svg.js";
-import { Square } from "./square.ts";
+import { Square } from "./Square.ts";
 import { pnone } from "../util/pnone.ts";
 
 class Block extends Square {
   n: number;
 
-  constructor({ coords, n }: { coords: Coords; n: number }) {
-    super({ coords });
+  constructor({ coords, n, svg }: { coords: Coords; n: number, svg: SVG.Svg }) {
+    super({ coords, svg });
     this.n = n;
   }
 
-  draw(canvas: SVG.Svg) {
-    this.group = this.border(canvas, (el) => {
+  render() {
+    this.group = this.border((el) => {
       el.stroke({ color: "#000", width: 3 })
         .css(pnone);
     });

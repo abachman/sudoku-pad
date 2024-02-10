@@ -1,10 +1,21 @@
-export type Select = CustomEvent<{ 
-  shiftKey: boolean 
-  key: GridKey
-}> & { type: "select" };
+export type Select =
+  & CustomEvent<{
+    shiftKey: boolean;
+    key: GridKey;
+  }>
+  & { type: "select" };
+
+export type Set =
+  & CustomEvent<{
+    value: number;
+    pencil: number[];
+    key: GridKey;
+  }>
+  & { type: "set" };
 
 interface CellEventMap {
   "select": Select;
+  "set": Set;
 }
 
 interface CellEventTarget extends EventTarget {
@@ -27,4 +38,3 @@ const TypedEventTarget = EventTarget as {
 
 export class CellEmitter extends TypedEventTarget {
 }
-

@@ -13,16 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 0 20px;
+body { 
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
 }
-
-#app {
-  background: #eee;
-  border: 1px solid #ccc;
-  width: 720px;
-  height: auto;
-}
-
