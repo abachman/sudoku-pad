@@ -1,7 +1,9 @@
 import SVG from "@svgdotjs/svg.js";
 import { autorun } from "mobx";
 
-import type { Block } from "./Block";
+import Debug from "debug";
+const debug = Debug("cell");
+
 import type { Grid } from "./Grid";
 import { CellEmitter, /* Select */ } from "./cell/events";
 import { CellState } from "./cell/CellState";
@@ -13,7 +15,6 @@ type CellOptions = {
   y: number;
   bx: number;
   by: number;
-  block: Block;
   grid: Grid;
   svg: SVG.Svg
   state?: Partial<CellState>;
@@ -24,13 +25,12 @@ class Cell extends Square {
   y: number;
   bx: number;
   by: number;
-  block: Block;
   grid: Grid;
   key: GridKey;
   target: CellEmitter = new CellEmitter();
   private state: CellState;
 
-  constructor({ coords, x, y, bx, by, block, grid, state, svg }: CellOptions) {
+  constructor({ coords, x, y, bx, by, grid, state, svg }: CellOptions) {
     super({ coords, svg });
 
     this.x = x;
@@ -38,15 +38,12 @@ class Cell extends Square {
     this.key = `${this.x}${this.y}`;
     this.bx = bx;
     this.by = by;
-    this.block = block;
     this.grid = grid;
-    this.grid.add(this);
     this.state = new CellState(state);
 
     this.element = null;
 
-    // this.target.addEventListener("select", this.onSelect.bind(this));
-    // this.target.addEventListener("set", this.onSet.bind(this));
+    debug('new cell', this.key, this.state.toJSON());
   }
 
   select() {
@@ -80,15 +77,9 @@ class Cell extends Square {
 
     this.element.on("mouseover", this.onMouseover.bind(this));
     this.element.on("mouseout", this.onMouseout.bind(this));
-    // this.element.on("click", this.onClick.bind(this));
 
     // bind all rendering to live data update events
     autorun(() => {
-      // if (this.state.selected) {
-      //   this.element?.attr({ fill: "#09a" });
-      // } else {
-      //   this.element?.attr({ fill: "#fff" });
-      // }
       if (this.state.focused) {
         this.decorate()
       } else {

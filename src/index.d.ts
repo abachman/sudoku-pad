@@ -5,6 +5,8 @@ type Position = { x: number; y: number }
 type GridKey = `${number}${number}`
 type GridSearch = Record<GridKey, Cell>;
 
+type FixedBoard = Record<GridKey, Partial<CellState>>
+
 type UP = 0
 type RIGHT = 1
 type DOWN = 2

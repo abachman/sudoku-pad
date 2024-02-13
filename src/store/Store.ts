@@ -1,7 +1,7 @@
 export class Store {
   constructor() { }
   
-  set(key: string, value: any) {
+  set(key: string, value: object) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 

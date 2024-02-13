@@ -102,7 +102,7 @@ class Square {
         x: cx + 3,
         y: cy + 3,
         fill: "transparent",
-        stroke: "rgba(50, 50, 200, 0.5)",
+        class: "stroke-sky-800 opacity-50",
         "stroke-width": 6,
       }).css(pnone);
     }

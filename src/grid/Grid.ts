@@ -1,5 +1,6 @@
+import { makeObservable, action, observable } from 'mobx';
 import type { Cell } from "./Cell";
-// import type { Select } from "./cell/events";
+import type { Block } from "./Block";
 
 type GridState = {
   focused?: Cell;
@@ -7,10 +8,34 @@ type GridState = {
 };
 
 class Grid {
+  blocks: Block[] = []
   cells: GridSearch = {};
   state: GridState = { focused: undefined, pencil: true };
 
-  constructor() { }
+  constructor() { 
+    makeObservable(this, {
+      state: observable,
+      togglePencil: action,
+      setState: action,
+      setFocus: action,
+    })
+  }
+
+  render() {
+    // grid
+    for (const cell of Object.values(this.cells)) {
+      cell.render();
+    }
+
+    // blocks
+    for (const block of this.blocks) {
+      block.render();
+    }
+  }
+
+  eachCell(cb: (c: Cell) => void) {
+    Object.values(this.cells).forEach(cb)
+  }
 
   setState(state: Partial<GridState>) {
     this.state = { ...this.state, ...state };
@@ -19,12 +44,6 @@ class Grid {
   add(cell: Cell) {
     this.cells[cell.key] = cell;
   }
-
-  // dispatch(event: Event | Select) {
-  //   for (const cell of Object.values(this.cells)) {
-  //     cell.target.dispatchEvent(event);
-  //   }
-  // }
 
   selectFocused() {
     if (!this.state.focused) return;
@@ -94,7 +113,14 @@ class Grid {
   }
 
   toJSON() {
-    return Object.entries(this.cells).map(([_key, cell]) => cell.toJSON())
+    return Object.
+      entries(this.cells).
+      map(([_key, cell]) => cell.toJSON())
+  }
+
+  togglePencil() {
+    this.state.pencil = !this.state.pencil;
+    return this.state.pencil;
   }
 }
 
