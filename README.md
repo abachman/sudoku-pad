@@ -1,6 +1,32 @@
-### Design
+## TODO
 
-An SVG.js app. 
+Features:
+
+- cell state 
+    - color
+        - button for each color
+- line drawing
+- selection / focus
+    - click to focus
+    - multi-select
+
+State management:
+
+- undo / redo
+- checkpoints
+- prepared games
+- save game
+- state management API
+
+goodmorning.computer:
+
+- server
+    - users
+    - games
+
+### DESIGN
+
+An SVG.js Sudoku board wrapped in a React app. 
 
 **Models**: Cell, Grid, Selection, Line (special rule illustrations)
 

@@ -1,4 +1,4 @@
-type ButtonProps = {
+export type ButtonProps = {
   label?: string
   onClick: () => void
   className?: string
@@ -10,7 +10,9 @@ const buttonStandard = `
   border  
   text-center font-sans uppercase
   focus:outline-none focus:ring 
-  p-2 mx-1
+  p-2
+  w[44px] h[44px]
+  flex items-center justify-center
 `
 
 const buttonColor = `
