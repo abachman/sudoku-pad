@@ -50,6 +50,9 @@ export const createActionSlice: StateCreator<
             cell.focused = false;
           }
         }),
+
+      // load / save
+      load: (board: FixedBoard) => set(Actions.loadGameState(board)),
     },
   };
 };

@@ -1,24 +1,25 @@
 import { StateStorage } from "zustand/middleware";
 
-const $store: Record<string, string> = {}
+// const $store: Record<string, string> = {}
 
 async function get(name: string): Promise<string | null> {
   return new Promise((resolve) => {
-    const value = $store[name]
+    const value = localStorage.getItem(name)
     resolve(value)
   })
 }
 
 async function set(name: string, value: string): Promise<void> {
   return new Promise((resolve) => {
-    $store[name] = value
+    console.log("set", { name, value: JSON.parse(value) })
+    localStorage.setItem(name, value)
     resolve()
   })
 }
 
 async function del(name: string): Promise<void> {
   return new Promise((resolve) => {
-    delete $store[name]
+    localStorage.removeItem(name)
     resolve()
   })
 }

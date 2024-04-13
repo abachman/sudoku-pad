@@ -21,6 +21,9 @@ export interface GridState {
     // Cell scope
     focus: (key: GridKey) => void;
     toggleFocus: (key: GridKey) => void;
+
+    // load / save
+    load: (board: FixedBoard) => void;
   };
 }
 

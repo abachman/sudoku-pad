@@ -74,9 +74,24 @@ const updateValueOrPencil: ActionProducer = (value: number) => {
   }
 }
 
+const loadGameState: ActionProducer = (game: FixedBoard) => {
+  return (state) => {
+    for (const _key in game) {
+      const key = _key as GridKey;
+      if (state.cells[key]) {
+        state.cells[key] = {
+          ...state.cells[key],
+          ...game[key],
+        };
+      }
+    }
+  };
+}
+
 export default {
   clearFocus,
   moveFocus,
   focus,
   updateValueOrPencil,
+  loadGameState,
 };

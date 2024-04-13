@@ -41,16 +41,36 @@ export function createGridStore(
       immer(
         devtools(
           persist(
-            (...a) => ({
+            (set, ...a) => ({
               cells: {},
               pencilMode: false,
               focused: null,
               ...initial,
-              ...createActionSlice(...a),
+              ...createActionSlice(set, ...a),
             }),
             {
               name: "zus-sudoku",
               storage: createJSONStorage(() => Persist),
+              onRehydrateStorage: () => {
+                console.log("rehydrated!");
+              },
+              merge: (persisted: unknown | GridState, current) => {
+                console.log("merge", { persisted, current });
+                if (persisted === null) {
+                  return current;
+                } else {
+                  return {
+                    ...current,
+                    ...persisted,
+                  };
+                }
+              },
+              partialize: (persisted) => {
+                console.log("partialize", persisted);
+                return {
+                  cells: persisted.cells,
+                };
+              },
             },
           ),
           {
