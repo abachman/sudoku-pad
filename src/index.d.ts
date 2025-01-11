@@ -3,7 +3,7 @@ type Coords = [number, number, number]
 type Position = { x: number; y: number }
 
 type GridKey = `${number}${number}`
-type GridSearch = Record<GridKey, Cell>;
+type GridSearch = Record<GridKey, Cell>
 
 type FixedBoard = Record<GridKey, Partial<CellState>>
 

@@ -1,4 +1,4 @@
-type DOMContentLoadedHandler =(this: Document, ev: Event) => void 
+type DOMContentLoadedHandler = (this: Document, ev: Event) => void
 
 export function domReady(fn: DOMContentLoadedHandler): void {
   if (document.readyState === "interactive" || document.readyState === "complete") {
@@ -7,4 +7,3 @@ export function domReady(fn: DOMContentLoadedHandler): void {
     document.addEventListener("DOMContentLoaded", fn)
   }
 }
-

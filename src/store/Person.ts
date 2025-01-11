@@ -1,28 +1,27 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx"
 
 // state management example
 export class Person {
-  _name: string = '';
-  _age: number = 0;
+  _name: string = ""
+  _age: number = 0
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this)
   }
 
   set name(name: string) {
-    this._name = name;
+    this._name = name
   }
 
   get name() {
-    return this._name;
+    return this._name
   }
 
   set age(age: number) {
-    this._age = age;
+    this._age = age
   }
 
   get age() {
-    return this._age;
+    return this._age
   }
 }
-  

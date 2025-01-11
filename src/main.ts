@@ -1,17 +1,15 @@
-import type { Grid } from "./grid/Grid";
-import { init } from "./grid/init";
-import "./style.css";
+import type { Grid } from "./grid/Grid"
+import { init } from "./grid/init"
+import "./style.css"
 
 declare global {
   interface Window {
-    grid: Grid;
+    grid: Grid
   }
 }
 
-const grid = init({ dom: "#app" });
-window.grid = grid;
-
-
+const grid = init({ dom: "#app" })
+window.grid = grid
 
 // // indicators
 // const pencil = new Button({

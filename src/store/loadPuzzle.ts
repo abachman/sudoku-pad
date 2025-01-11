@@ -2,13 +2,13 @@ import one from "../../puzzles/one.json"
 
 export function loadPuzzle(): FixedBoard {
   const fixedBoard: FixedBoard = {}
-  let r = 0;
-  let c = 0;
-  for (const value of one.board.split('')) {
-    if (value !== '0') {
-      fixedBoard[`${c+1}${r+1}`] = {
+  let r = 0
+  let c = 0
+  for (const value of one.board.split("")) {
+    if (value !== "0") {
+      fixedBoard[`${c + 1}${r + 1}`] = {
         value: parseInt(value),
-        fixed: true
+        fixed: true,
       }
     }
 

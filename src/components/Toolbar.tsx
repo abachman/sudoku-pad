@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react-lite'
+import { observer } from "mobx-react-lite"
 import { GridContext } from "../grid/GridContext"
 import { useContext } from "react"
 import {
@@ -16,10 +16,7 @@ const Toolbar = observer(() => {
 
   return (
     <div className="pt-2">
-      <ToggleButton
-        onClick={() => grid.togglePencil()}
-        active={grid.state.pencil as boolean}
-      >
+      <ToggleButton onClick={() => grid.togglePencil()} active={grid.state.pencil as boolean}>
         <PencilIcon className="w-6 h-6" />
       </ToggleButton>
       <CircleButton onClick={() => grid.moveFocus(UP)}>

@@ -1,12 +1,12 @@
 export class Store {
-  constructor() { }
-  
+  constructor() {}
+
   set(key: string, value: object) {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value))
   }
 
   get(key: string) {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : null;
+    const value = localStorage.getItem(key)
+    return value ? JSON.parse(value) : null
   }
 }
